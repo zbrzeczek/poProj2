@@ -23,6 +23,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 // Perform actions when "Hex" button is pressed
                 result = HEX;
+                nowaGra();
             }
         });
 
