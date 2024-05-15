@@ -1,45 +1,20 @@
 package gui;
 
+import other.MenadzerPlikow;
+import swiat.Swiat;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 public class App extends JFrame{
-    public static final String TYTUL = "Symulacja";
+    public static final String TYTUL = "Symulacja swiata";
     public static final int HEIGHT = 600;
     public static final int WIDTH = 600;
 
-
-    public App(int wysokosc, int szerokosc){
-
-        setSize(szerokosc,wysokosc);
-        setMinimumSize(new Dimension(szerokosc,wysokosc));
-
-        revalidate();
-
-        setTitle(TYTUL);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        wizualizacja = new Wizualizacja(HEIGHT * 8/10, Swiat.Bazowy(Swiat.Typ.Hex));
-        menedzerPlikow = new MenedzerPlikow();
-
-        inicjujMenuGorne();
-        inicjujPanelGlowny();
-
-    }
-
-
-    public void start(){
-
-        setVisible(true);
-
-
-    }
-
-
-    private final Wizualizacja wizualizacja;
-    private final MenedzerPlikow menedzerPlikow;
+    private final Menadzer menadzer;
+    private final MenadzerPlikow menedzerPlikow;
 
     private JButton turaButton;
     private JButton dziennikButton;
@@ -50,6 +25,27 @@ public class App extends JFrame{
     private JMenuItem menuItemWczytaj;
     private JMenuItem menuItemZapisz;
 
+
+    public App(int wysokosc, int szerokosc){
+        setSize(szerokosc,wysokosc);
+        setMinimumSize(new Dimension(szerokosc,wysokosc));
+
+        revalidate();
+
+        setTitle(TYTUL);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        menadzer = new Menadzer(HEIGHT * 8/10, Swiat.Bazowy(Swiat.Typ.Hex));
+        menedzerPlikow = new MenadzerPlikow();
+
+        menuGorne();
+        inicjujPanelGlowny();
+    }
+
+
+    public void start(){
+        setVisible(true);
+    }
 
     private void menuGorne(){
         JMenuBar menuBar = new JMenuBar();
@@ -80,20 +76,15 @@ public class App extends JFrame{
         menuItemBazowy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                wizualizacja.setSwiat(Swiat.Bazowy(Swiat.Typ.Kartezjanski));
-
+                menadzer.setSwiat(Swiat.Bazowy(Swiat.Typ.Kartezjanski));
             }
-
         });
 
 
         menuItemBazowyHex.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                wizualizacja.setSwiat(Swiat.Bazowy(Swiat.Typ.Hex));
-
+                menadzer.setSwiat(Swiat.Bazowy(Swiat.Typ.Hex));
             }
         });
 
@@ -106,55 +97,36 @@ public class App extends JFrame{
                 int rv = fc.showOpenDialog(null);
 
                 if(rv == JFileChooser.APPROVE_OPTION){
-
                     File plik = fc.getSelectedFile();
                     Swiat sw = menedzerPlikow.wczytaj(plik);
-
                     if(sw != null){
-
-                        wizualizacja.setSwiat(sw);
-
+                        menadzer.setSwiat(sw);
                     }
-
                 }
-
-
             }
-
         });
 
         menuItemZapisz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 JFileChooser fc = new JFileChooser();
                 fc.setDialogTitle("wybierz plik do zapisu");
 
                 int rv = fc.showOpenDialog(null);
 
                 if(rv == JFileChooser.APPROVE_OPTION){
-
                     File plik = fc.getSelectedFile();
-                    menedzerPlikow.zapisz(wizualizacja.getSwiat(), plik);
-
+                    menedzerPlikow.zapisz(menadzer.getSwiat(), plik);
                 }
-
             }
-
         });
-
-
     }
 
 
     private void inicjujPanelGlowny(){
-
-
         inicjujGuziki();
 
         JPanel panelGuziki = new JPanel();
-
-
 
         GridLayout layout = new GridLayout(0,2);
         panelGuziki.setLayout(layout);
@@ -162,50 +134,37 @@ public class App extends JFrame{
         panelGuziki.add(turaButton);
         panelGuziki.add(dziennikButton);
 
-
         JSplitPane splitPane = new JSplitPane();
 
         splitPane.setEnabled(false);
         splitPane.setDividerLocation( HEIGHT * 8 / 10);
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-        splitPane.addMouseListener(wizualizacja);
+        splitPane.addMouseListener(menadzer);
 
-        splitPane.setTopComponent(wizualizacja);
+        splitPane.setTopComponent(menadzer);
         splitPane.setBottomComponent(panelGuziki);
 
         add(splitPane);
-
     }
 
     private void inicjujGuziki(){
-
         turaButton = new JButton("nastepna tura");
         dziennikButton = new JButton("dziennik");
 
-
         turaButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
-                wizualizacja.nastepnaTura();
-
+                menadzer.nastepnaTura();
             }
-
         });
 
         dziennikButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showConfirmDialog(null,wizualizacja.getDziennik().wypisz(),"Dziennik", JOptionPane.DEFAULT_OPTION);
+                JOptionPane.showConfirmDialog(null, menadzer.getDziennik().wypisz(),"Dziennik", JOptionPane.DEFAULT_OPTION);
             }
-
         });
-
-
-
     }
 
 }
