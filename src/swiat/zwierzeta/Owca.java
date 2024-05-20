@@ -7,12 +7,8 @@ import other.Point;
 import java.awt.*;
 
 public class Owca extends Zwierze {
-
-    public static final int SILA = 4;
-    public static final int INICJATYWA = 4;
-
     public Owca(Point polozenie) {
-        super(polozenie, SILA, INICJATYWA);
+        super(polozenie, 4, 4);
     }
 
     @Override
@@ -22,7 +18,7 @@ public class Owca extends Zwierze {
 
     @Override
     public Color rysowanie() {
-        return Color.GRAY;
+        return new Color(230,210,105);
     }
 
     @Override

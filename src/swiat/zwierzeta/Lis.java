@@ -6,12 +6,8 @@ import other.Point;
 
 import java.awt.*;
 public class Lis extends Zwierze {
-
-    public static final int SILA = 3;
-    public static final int INICJATYWA = 7;
-
     public Lis(Point polozenie) {
-        super(polozenie, SILA, INICJATYWA);
+        super(polozenie, 3, 7);
     }
 
     @Override
@@ -21,7 +17,7 @@ public class Lis extends Zwierze {
 
     @Override
     public Color rysowanie() {
-        return Color.ORANGE;
+        return new Color(209,140,55);
     }
 
     @Override

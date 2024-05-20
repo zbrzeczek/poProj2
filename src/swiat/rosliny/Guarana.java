@@ -6,12 +6,10 @@ import swiat.Organizm;
 
 import java.awt.*;
 public class Guarana extends Roslina {
-
-    public static final int SILA = 0;
     public static final int ZWIEKSZENIE_SILY = 3;
 
     public Guarana(Point polozenie) {
-        super(polozenie, SILA);
+        super(polozenie, 0);
     }
 
     @Override

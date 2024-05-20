@@ -171,7 +171,7 @@ public class Swiat {
         swiat.addOrganizm(new WilczeJagody(new Point(1,0)));
 
         swiat.addOrganizm(new BarszczSosnowskiego(new Point(21,24)));
-        swiat.addOrganizm(new Czlowiek(new Point(25,25)));
+        swiat.addOrganizm(new Czlowiek(new Point(15,15)));
 
         return swiat;
     }

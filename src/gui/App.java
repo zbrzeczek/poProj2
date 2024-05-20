@@ -11,13 +11,12 @@ import java.io.File;
 public class App extends JFrame{
     public static final String TYTUL = "Symulacja swiata";
     public static final int HEIGHT = 600;
-    public static final int WIDTH = 600;
+    public static final int WIDTH = 500;
 
     private final Menadzer menadzer;
     private final MenadzerPlikow menedzerPlikow;
 
     private JButton turaButton;
-    private JButton dziennikButton;
     private JMenuItem menuItemBazowy;
 
     private JMenuItem menuItemBazowyHex;
@@ -35,11 +34,11 @@ public class App extends JFrame{
         setTitle(TYTUL);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        menadzer = new Menadzer(HEIGHT * 8/10, Swiat.Bazowy(Swiat.Typ.Hex));
+        menadzer = new Menadzer(HEIGHT * 8/10, Swiat.Bazowy(Swiat.Typ.Kartezjanski));
         menedzerPlikow = new MenadzerPlikow();
 
         menuGorne();
-        inicjujPanelGlowny();
+        panelGlowny();
     }
 
 
@@ -123,16 +122,12 @@ public class App extends JFrame{
     }
 
 
-    private void inicjujPanelGlowny(){
-        inicjujGuziki();
+    private void panelGlowny(){
+        guzikiGlowny();
 
         JPanel panelGuziki = new JPanel();
 
-        GridLayout layout = new GridLayout(0,2);
-        panelGuziki.setLayout(layout);
-
         panelGuziki.add(turaButton);
-        panelGuziki.add(dziennikButton);
 
         JSplitPane splitPane = new JSplitPane();
 
@@ -148,23 +143,16 @@ public class App extends JFrame{
         add(splitPane);
     }
 
-    private void inicjujGuziki(){
+    private void guzikiGlowny(){
         turaButton = new JButton("nastepna tura");
-        dziennikButton = new JButton("dziennik");
 
         turaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                menadzer.nastepnaTura();
-            }
-        });
 
-        dziennikButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showConfirmDialog(null, menadzer.getDziennik().wypisz(),"Dziennik", JOptionPane.DEFAULT_OPTION);
+                menadzer.nastepnaTura();
+                menadzer.getDziennik().wypisz();
             }
         });
     }
-
 }

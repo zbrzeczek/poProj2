@@ -7,14 +7,11 @@ import java.awt.*;
 import static java.lang.Math.random;
 
 public class Antylopa extends Zwierze {
-
-    public static final int SILA = 4;
-    public static final int INICJATYWA = 4;
     public static final int ZASIEG = 2;
     public static final double P_UCIECZKI = 0.5;
 
     public Antylopa(Point polozenie) {
-        super(polozenie, SILA, INICJATYWA);
+        super(polozenie, 4, 4);
     }
 
     @Override
@@ -29,7 +26,7 @@ public class Antylopa extends Zwierze {
 
     @Override
     public Color rysowanie() {
-        return new Color(150,75,0);
+        return new Color(70,50,27);
     }
 
     @Override

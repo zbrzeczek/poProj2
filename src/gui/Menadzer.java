@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Menadzer extends JPanel implements MouseListener, KeyListener{
-    private static final Color KOLOR_TLA = new Color(0,0,0);
+    private static final Color KOLOR_TLA = new Color(240, 240, 240);
     private static final Color KOLOR_INFO = new Color(255,200,200);
 
     private JPopupMenu nowyOrganizmMenu;
@@ -154,10 +154,6 @@ public class Menadzer extends JPanel implements MouseListener, KeyListener{
             }
 
         }
-
-        if(maCzlowieka()){
-            czlowiekInfo(g);
-        }
     }
 
 
@@ -213,7 +209,7 @@ public class Menadzer extends JPanel implements MouseListener, KeyListener{
                 swiat.setRuch(Swiat.Ruch.PRAWO);
                 break;
 
-            case KeyEvent.VK_Z:
+            case KeyEvent.VK_S:
                 swiat.setRuch(Swiat.Ruch.SPECJALNY);
                 break;
 
@@ -225,38 +221,8 @@ public class Menadzer extends JPanel implements MouseListener, KeyListener{
     public void keyReleased(KeyEvent keyEvent) {
     }
 
-
     public Swiat getSwiat() {
         return swiat;
-    }
-
-
-    private void czlowiekInfo(Graphics g){
-        g.setColor(KOLOR_INFO);
-        String komunikat = "Ruch czlowieka: ";
-
-        switch(swiat.getRuch()){
-            case GORA:
-                komunikat+="do gory";
-                break;
-            case DOL:
-                komunikat+= "na dol";
-                break;
-            case STOJ:
-                komunikat+="bedzie stal";
-                break;
-            case LEWO:
-                komunikat+="w lewo";
-                break;
-            case PRAWO:
-                komunikat+="w prawo";
-                break;
-            case SPECJALNY:
-                komunikat+="uruchomi umiejetnosc specjalna";
-                break;
-
-        }
-        g.drawString(komunikat,0,10);
     }
 
 

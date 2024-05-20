@@ -10,59 +10,42 @@ import static java.lang.Math.random;
 public class Czlowiek extends Zwierze {
 
     private int turySpecjalne = 0;
-    public static final int SILA = 5;
-    public static final int INICJATYWA = 4;
     public static final int SPECJALNY_TURY = 5;
-    public static final int SPECJALNY_MNIEJ = 2;
-    public static final double P_MNIEJ = 0.5;
-
 
     public Czlowiek(Point polozenie) {
-        super(polozenie, SILA, INICJATYWA);
+        super(polozenie, 5, 4);
     }
 
     @Override
     public void akcja(){
-
-        int zasieg;
-
         if(turySpecjalne == 0){
-            zasieg = 1;
-        }
-        else if(turySpecjalne > SPECJALNY_MNIEJ){
-            zasieg = Antylopa.ZASIEG;
-            turySpecjalne--;
+            setSila(5);
         }
         else {
-            if(random() < P_MNIEJ){
-                zasieg = Antylopa.ZASIEG;
-            }
-            else {
-                zasieg = 1;
-            }
+            setSila(getSila()-1);
             turySpecjalne--;
         }
 
         switch(swiat.popRuch()){
-
             case GORA:
-                zmienPolozenie(new Point(zasieg * -1, 0));
+                zmienPolozenie(new Point( -1, 0));
                 break;
 
             case DOL:
-                zmienPolozenie(new Point(zasieg, 0));
+                zmienPolozenie(new Point(1, 0));
                 break;
 
             case PRAWO:
-                zmienPolozenie(new Point(0, zasieg));
+                zmienPolozenie(new Point(0, 1));
                 break;
 
             case LEWO:
-                zmienPolozenie(new Point(0, -1 * zasieg));
+                zmienPolozenie(new Point(0, -1));
                 break;
 
             case SPECJALNY:
                 if(turySpecjalne == 0){
+                    setSila(10);
                     turySpecjalne = SPECJALNY_TURY;
                 }
                 break;
@@ -73,7 +56,6 @@ public class Czlowiek extends Zwierze {
         this.turySpecjalne = turySpecjalne;
     }
 
-
     @Override
     public String toString() {
         return "CZLOWIEK";
@@ -81,7 +63,7 @@ public class Czlowiek extends Zwierze {
 
     @Override
     public Color rysowanie() {
-        return new Color(255,253,150);
+        return new Color(0,0,0);
     }
 
     public int getTurySpecjalne() {

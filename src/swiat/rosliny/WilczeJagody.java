@@ -6,10 +6,9 @@ import swiat.Organizm;
 
 import java.awt.*;
 public class WilczeJagody extends Roslina {
-    public static int SILA = 0;
 
     public WilczeJagody(Point polozenie) {
-        super(polozenie, SILA);
+        super(polozenie, 0);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class WilczeJagody extends Roslina {
 
     @Override
     public Color rysowanie() {
-        return new Color(49, 0, 76);
+        return new Color(60, 25, 115);
     }
 
     @Override

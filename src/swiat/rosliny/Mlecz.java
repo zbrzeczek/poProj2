@@ -6,12 +6,10 @@ import swiat.Roslina;
 import java.awt.*;
 
 public class Mlecz extends Roslina {
-
-    public static final int SILA = 0;
     public static final int PROBY = 3;
 
     public Mlecz(Point polozenie) {
-        super(polozenie, SILA);
+        super(polozenie, 0);
     }
 
     @Override

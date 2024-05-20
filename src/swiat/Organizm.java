@@ -49,9 +49,7 @@ abstract public class Organizm {
         return wiek;
     }
 
-    public void dodajModyfikator(Organizm organizm) {
-
-    }
+    public void dodajModyfikator(Organizm organizm) {}
 
     public boolean czyOdbilAtak(Organizm org){
         return false;
